@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediGuide AI | Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/mediguide-ai-logo') }}" type="image/x-icon">
+</head>
+
+<body>
+    <div class="main">
+        <img src="../static/images/mediguide-ai-logo.png" alt="MediGuide-AI Logo" class="main-img">
+        <div class="login">
+            <h1>MediGuide AI</h1>
+            <h3>Login</h3>
+            <div class="input">
+                <div>
+                    <input type="text" placeholder="Enter your Email">
+                </div>
+
+                <div>
+                    <input type="password" placeholder="Enter your Password">
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+            </div>
+
+            <div class="sign-in-button">
+                <button>Sign In</button>
+            </div>
+
+            <div class="sign-in-with-google">
+                <a href="/login/start">
+                    <button>
+                        <img src="../static/images/google.png" alt="">
+                        Sign In with Google
+                    </button>
+                </a>
+            </div>
+
+            <div class="sign_up">
+                <label>Don't have an account?</label>
+                <a href="#">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

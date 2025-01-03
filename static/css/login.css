@@ -1,0 +1,154 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #ADA996, #CFCDC4, #E1E0DB, #EAEAEA);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 400px;
+    text-align: center;
+}
+
+.main-img {
+    width: 80px;
+    animation: flip 6s infinite ease;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+h3 {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input {
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.forgot-password {
+    color: #8e8e8e;
+    font-weight: 900;
+    text-align: right;
+    padding-right: 8px;
+}
+
+a {
+    text-decoration: none;
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+.sign-in-button button, .sign-in-with-google button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.sign-in-button button {
+    background-color: #ca9bed;
+    color: white;
+}
+
+.sign-in-button button:hover {
+    background-color: #ca9bed;
+}
+
+.sign-in-with-google button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sign-in-with-google button img{
+    height: 20px;
+    width: 20px;
+}
+
+.sign_up {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.sign_up label {
+    font-size: 14px;
+    color: #333;
+}
+
+.sign_up a {
+    margin-left: 5px;
+    color: #8e8e8e;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        height: 90vh;
+    }
+    .main {
+        /* border: none; */
+        margin: 10px;
+    }
+    .forgot-password {
+        font-weight: 900;
+        text-align: right;
+        padding-right: 8px;
+    }
+}
