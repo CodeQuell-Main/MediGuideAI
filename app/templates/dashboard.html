@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('chatbot_routes.static', filename='css/chatbot.css') }}">
-  <link rel="shortcut icon" href="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}" type="image/x-icon">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>MediGuide AI</title>
 </head>
@@ -24,7 +24,7 @@
         <button type="submit" class="logout"><a href="/logout">Logout</a></button>
       </div>
       <div class="logo MediGuide-AI">
-        <img src="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo') }}" alt="MediGuide AI">
+        <img src="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}" alt="MediGuide AI">
       </div>
       <h1>Hi, <span class="user-name">{{ user['name'] }}</span></h1>
       <p class="subtext">

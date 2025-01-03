@@ -1,0 +1,16 @@
+runtime: python312
+
+entrypoint: gunicorn -b :$PORT run:app
+
+env_variables:
+  FLASK_ENV: production
+
+handlers:
+  - url: /static
+    static_dir: app/static
+
+  # - url: /favicon.ico
+  #   static_file: app/static/images/favicon.ico
+
+  - url: /.*
+    script: auto
