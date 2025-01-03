@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, redirect, url_for, session, rende
 from flask_dance.contrib.google import google
 from .chatbot import generate_response
 
-chatbot_routes = Blueprint("chatbot_routes", __name__, template_folder="../templates", static_folder="../static")
+chatbot_routes = Blueprint("chatbot_routes", __name__, template_folder="./templates", static_folder='static', static_url_path='./static')
 
 @chatbot_routes.route("/")
 @chatbot_routes.route("/login")
@@ -63,5 +63,4 @@ def logout():
     if google.authorized:
         google.get('/oauth2/v1/revoke?token=' + google.token['access_token'])
     session.clear()
-
     return redirect(url_for('chatbot_routes.login'))

@@ -29,6 +29,6 @@ def create_app():
     app.register_blueprint(google_bp)
 
     from .routes import chatbot_routes
-    app.register_blueprint(chatbot_routes)
+    app.register_blueprint(chatbot_routes, url_prefix='')
 
     return app
