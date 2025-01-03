@@ -7,22 +7,29 @@ load_dotenv()
 openai.api_key = os.getenv("OPEN_AI_KEY")
 
 def is_medical_academics_question(user_message):
-    classification_prompt = f"""
-    Determine if the following query is related to medical students' academics.
-    Respond with "Yes" if it is, otherwise respond with "No".
+    classification_prompt = [
+        {
+            "role": "system",
+            "content": (
+                "You are an assistant that determines if a question is related to medical academics for students. "
+                "Medical academics include topics like diseases, anatomy, physiology, medical research, and treatments. "
+                "Answer only 'Yes' or 'No' with no additional text."
+            ),
+        },
+        {"role": "user", "content": f"Is the following query related to medical academics? \n\nQuery: \"{user_message}\""},
+    ]
     
-    Query: "{user_message}"
-    """
-    
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=classification_prompt,
-        max_tokens=10,
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=classification_prompt,
+        max_tokens=5,
         temperature=0
     )
     
-    classification = response['choices'][0]['text'].strip()
-    return classification.lower() == "yes"
+    classification = response['choices'][0]['message']['content'].strip().lower()
+    # print(f"DEBUG: Classification response: {classification}")  # Debugging log
+
+    return classification == "yes"
 
 def generate_response(user_message):
     moderation_response = openai.Moderation.create(
@@ -43,7 +50,7 @@ def generate_response(user_message):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=messages,
-        max_tokens=500
+        max_tokens=50
     )
     
     return response['choices'][0]['message']['content']

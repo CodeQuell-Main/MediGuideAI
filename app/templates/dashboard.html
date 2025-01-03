@@ -5,16 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('chatbot_routes.static', filename='css/chatbot.css') }}">
-  <link rel="shortcut icon" href="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}"
+    type="image/x-icon">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>MediGuide AI</title>
 </head>
 
 <body>
   <div class="container">
-    <div class="sidebar">
-      <!-- <div class="menu-icon">&#9776;</div> -->
-    </div>
+    <div class="sidebar"></div>
     <div class="main-content">
       <div class="top-bar">
         <div class="user-profile">
@@ -23,20 +22,111 @@
         </div>
         <button type="submit" class="logout"><a href="/logout">Logout</a></button>
       </div>
-      <div class="logo MediGuide-AI">
-        <img src="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}" alt="MediGuide AI">
+      <div class="header">
+        <div class="logo MediGuide-AI">
+          <img src="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}" alt="MediGuide AI">
+        </div>
+        <h1>Hi, <span class="user-name">{{ user['name'] }}</span></h1>
+        <p class="subtext">
+          Ready to assist you with anything you need, from answering questions to providing recommendations. Let's get
+          started!
+        </p>
       </div>
-      <h1>Hi, <span class="user-name">{{ user['name'] }}</span></h1>
-      <p class="subtext">
-        Ready to assist you with anything you need, from answering questions to providing recommendations. Let's get
-        started!
-      </p>
       <div class="chatbox">
-        <input type="text" placeholder="Ask MediGuide Your Questions" class="chat-input">
-        <button class="send-button"><i class="material-icons">send</i></button>
+        <div class="messages">
+          <!-- Chat messages will be dynamically inserted here -->
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="input-area fixed-input">
+    <input type="text" placeholder="Ask MediGuide Your Questions" class="chat-input">
+    <button class="send-button">
+      <i class="material-icons">send</i>
+    </button>
+  </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatInput = document.querySelector(".chat-input");
+      const sendButton = document.querySelector(".send-button");
+      const messagesContainer = document.querySelector(".messages");
+      const header = document.querySelector(".header");
+
+      let isHeaderHidden = false; // Track if header is hidden
+
+      /**
+       * Add a message to the chat container.
+       * @param {string} content - The message text.
+       * @param {string} sender - The sender of the message ('user' or 'bot').
+       */
+      function addMessage(content, sender) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", sender);
+
+        const bubble = document.createElement("div");
+        bubble.classList.add("bubble");
+        bubble.textContent = content;
+
+        messageDiv.appendChild(bubble);
+        messagesContainer.appendChild(messageDiv);
+
+        // Scroll to the latest message
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      /**
+       * Send the user's message to the server and handle the response.
+       */
+      async function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+
+        // Hide the header only once
+        if (!isHeaderHidden) {
+          header.classList.add("hidden");
+          isHeaderHidden = true;
+        }
+
+        // Add user's message to the chat
+        addMessage(userMessage, "user");
+        chatInput.value = "";
+
+        try {
+          // Send the user's question to the server
+          const response = await fetch("/ask", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ question: userMessage }),
+          });
+
+          const data = await response.json();
+
+          // Handle the response from the server
+          if (data.error) {
+            addMessage(data.error, "bot");
+          } else {
+            addMessage(data.answer, "bot");
+          }
+        } catch (error) {
+          // Handle any errors that occur
+          addMessage("An error occurred. Please try again.", "bot");
+        }
+      }
+
+      // Event listener for the send button
+      sendButton.addEventListener("click", sendMessage);
+
+      // Event listener for the Enter key in the chat input
+      chatInput.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") sendMessage();
+      });
+    });
+  </script>
 </body>
 
 </html>
