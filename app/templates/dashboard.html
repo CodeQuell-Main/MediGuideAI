@@ -38,11 +38,13 @@
       </div>
     </div>
   </div>
-  <div class="input-area fixed-input">
-    <input type="text" placeholder="Ask MediGuide Your Questions" class="chat-input">
-    <button class="send-button">
-      <i class="material-icons">send</i>
-    </button>
+  <div class="fixed-input-container">
+    <div class="input-area fixed-input">
+      <input type="text" placeholder="Ask MediGuide Your Questions" class="chat-input">
+      <button class="send-button">
+        <i class="material-icons">send</i>
+      </button>
+    </div>
   </div>
 
 
@@ -71,8 +73,23 @@
         messageDiv.appendChild(bubble);
         messagesContainer.appendChild(messageDiv);
 
-        // Scroll to the latest message
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        // Scroll the newly added message to the center of the screen if it's from the bot
+        if (sender === "bot") {
+          setTimeout(() => {
+            // Get the height of the message container and the new message
+            const messageHeight = messageDiv.offsetHeight;
+            const containerHeight = messagesContainer.offsetHeight;
+
+            // Scroll to the position where the new bot message is in the center
+            messagesContainer.scrollTo({
+              top: messagesContainer.scrollHeight - containerHeight + messageHeight / 2,
+              behavior: "smooth"
+            });
+          }, 50); // Add slight delay to ensure message is added before scrolling
+        } else {
+          // For user messages, just scroll to the bottom
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
       }
 
       /**
