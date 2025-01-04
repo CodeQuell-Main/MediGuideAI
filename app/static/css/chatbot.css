@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
   position: relative;
 }
 
@@ -35,6 +35,7 @@ body {
 
 .top-bar {
   position: fixed;
+  background: linear-gradient(to right, #ADA996, #CFCDC4, #E1E0DB, #EAEAEA);
   top: 0;
   right: 0;
   left: 0;
@@ -98,51 +99,23 @@ h1 .user-name {
   margin-bottom: 40px;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  height: 100vh;
-  overflow: hidden; /* Prevent content overflow */
-}
-
 .chatbox {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 60%;
-  /* max-width: 600px; */
-  /* height: calc(100% - 20px); Take full height minus padding/margin */
+  width: 90%;
   padding: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background: white;
-  position: relative;
-  /* padding-bottom: 80px; Adjust for fixed input */
+  margin-bottom: 20%;
 }
 
 .messages {
   flex-grow: 1;
-  overflow-y: auto; /* Enable scrolling for messages */
+  overflow-y: auto;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.input-area {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
-  background: white;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  border-top: 1px solid #ddd;
 }
 
 .chat-input {
@@ -172,28 +145,45 @@ h1 .user-name {
 }
 
 .bubble {
-  max-width: 80%;
+  max-width: 70%;
   padding: 10px 15px;
   border-radius: 15px;
   font-size: 14px;
   line-height: 1.4;
   word-wrap: break-word;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .message.user .bubble {
   background: #cae8fc;
   border-bottom-right-radius: 0;
+  display: inline-block;
+  float: right;
 }
 
 .message.bot .bubble {
   background: #f1f1f1;
   border-bottom-left-radius: 0;
+  left: 0;
+}
+
+.message.user::before {
+  content: "\A";
+  white-space: pre;
+}
+
+.message.bot::before {
+  content: "\A";
+  white-space: pre;
 }
 
 .header {
   text-align: center;
   margin-bottom: 20px;
   transition: all 0.3s ease;
+
 }
 
 .hidden {
@@ -203,21 +193,19 @@ h1 .user-name {
   display: none;
 }
 
-/* Fixed Input Area */
 .fixed-input {
   position: fixed;
-  bottom: 15px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 80%;
   max-width: 600px;
   padding: 10px;
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
-  border: 1px solid #ddd;
   z-index: 1000;
 }
 
