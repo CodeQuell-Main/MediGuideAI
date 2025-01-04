@@ -21,7 +21,7 @@ Ensure you have the following installed on your machine:
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/medi-guide-ai.git
+git clone https://github.com/CodeQuell-Main/MediGuideAI.git
 cd medi-guide-ai
 ```
 
