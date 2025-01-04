@@ -26,7 +26,7 @@
       <div class="logo MediGuide-AI">
         <img src="../static/images/mediguide-ai-logo.png" alt="MediGuide AI">
       </div>
-      <h1>Hi, <span class="user-name">{{ user['name'] }}</span></h1>
+      <h1>Hi, <span class="user-name" id="typeText" data-text="disaster">{{ user['name'] }}</span></h1>
       <p class="subtext">
         Ready to assist you with anything you need, from answering questions to providing recommendations. Let's get
         started!
@@ -55,12 +55,27 @@
       const messagesContainer = document.querySelector(".messages");
       const header = document.querySelector(".header");
 
-      let isHeaderHidden = false; // Track if header is hidden
+      let isHeaderHidden = false;
+
+      const userName = "{{ user['name'] }}";  // Use the dynamic user name
+
+      // Typewriter animation logic based on user name length
+      const words = userName.split(""); // Split the user's name into individual characters
+      const typingSpeed = 150; // Speed of typing animation in milliseconds
+
+      function typeUserName() {
+        if (index < words.length) {
+          typeText.innerText += words[index]; // Add one character at a time
+          index++;
+          setTimeout(typeUserName, typingSpeed); // Delay next character typing
+        }
+      }
+
+      setTimeout(typeUserName, 1000); // Start after 1 second delay
 
       /**
-       * Add a message to the chat container.
-       * @param {string} content - The message text.
-       * @param {string} sender - The sender of the message ('user' or 'bot').
+       * @param {string} content
+       * @param {string} sender
        */
       function addMessage(content, sender) {
         const messageDiv = document.createElement("div");
@@ -73,44 +88,27 @@
         messageDiv.appendChild(bubble);
         messagesContainer.appendChild(messageDiv);
 
-        // Scroll the newly added message to the center of the screen if it's from the bot
-        if (sender === "bot") {
-          setTimeout(() => {
-            // Get the height of the message container and the new message
-            const messageHeight = messageDiv.offsetHeight;
-            const containerHeight = messagesContainer.offsetHeight;
-
-            // Scroll to the position where the new bot message is in the center
-            messagesContainer.scrollTo({
-              top: messagesContainer.scrollHeight - containerHeight + messageHeight / 2,
-              behavior: "smooth"
-            });
-          }, 50); // Add slight delay to ensure message is added before scrolling
-        } else {
-          // For user messages, just scroll to the bottom
-          messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
+        setTimeout(() => {
+          messagesContainer.scrollTo({
+            top: messagesContainer.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 50);
       }
 
-      /**
-       * Send the user's message to the server and handle the response.
-       */
       async function sendMessage() {
         const userMessage = chatInput.value.trim();
         if (!userMessage) return;
 
-        // Hide the header only once
         if (!isHeaderHidden) {
           header.classList.add("hidden");
           isHeaderHidden = true;
         }
 
-        // Add user's message to the chat
         addMessage(userMessage, "user");
         chatInput.value = "";
 
         try {
-          // Send the user's question to the server
           const response = await fetch("/ask", {
             method: "POST",
             headers: {
@@ -121,22 +119,18 @@
 
           const data = await response.json();
 
-          // Handle the response from the server
           if (data.error) {
             addMessage(data.error, "bot");
           } else {
             addMessage(data.answer, "bot");
           }
         } catch (error) {
-          // Handle any errors that occur
           addMessage("An error occurred. Please try again.", "bot");
         }
       }
 
-      // Event listener for the send button
       sendButton.addEventListener("click", sendMessage);
 
-      // Event listener for the Enter key in the chat input
       chatInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") sendMessage();
       });

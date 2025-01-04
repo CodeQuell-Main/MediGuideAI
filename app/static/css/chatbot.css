@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 body {
@@ -87,6 +88,23 @@ body {
 h1 {
   font-size: 28px;
   margin-bottom: 10px;
+  >span {
+    display: inline-block;
+    position: relative;
+    color: transparent;
+    width: fit-content;
+
+    >#typeText {
+      display: inline-block;
+      position: relative;
+      color: transparent;
+      width: fit-content;
+      overflow: hidden;
+      border-right: solid 1px rgba(100, 100, 100, 0.25);
+      white-space: nowrap;
+      animation: type 5s steps(9) infinite;
+    }
+}
 }
 
 h1 .user-name {
@@ -111,11 +129,12 @@ h1 .user-name {
 
 .messages {
   flex-grow: 1;
-  overflow-y: auto;
+  /* max-height: 500px; */
+  overflow-y: scroll;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 10px;
 }
 
@@ -160,7 +179,6 @@ h1 .user-name {
 .message.user .bubble {
   background: #cae8fc;
   border-bottom-right-radius: 0;
-  display: inline-block;
   float: right;
 }
 
