@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: "Inknut Antiqua", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/BG-Design.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    user-select: none;
+}
+
+.header {
+    display: grid;
+    padding: 15px;
+}
+
+.logo {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+
+.logo img {
+    width: 20%;
+}
+
+.context {
+    grid-column: 1 / span 1;
+    grid-row: 2;
+    font-size: 15px;
+}
+
+.features {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+.features img {
+    width: 70%;
+    float: right;
+}
+
+.stamps {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+.stamp {
+    max-width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stamp img {
+    max-width: 150px;
+    height: auto;
+}
+
+.cta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cta button {
+    background-color: #ffcc00;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Inknut Antiqua", sans-serif;
+}
+
+.cta button:hover {
+    background-color: #e6b800;
+}
+
+.cta button img {
+    width: 16px;
+    height: auto;
+    background-color: #000;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.mobile-features {
+    display: none;
+}
+
+@media screen and (max-width: 480px) {
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo img {
+        width: 200px;
+    }
+
+    .features {
+        display: none;
+    }
+
+    .features img {
+        width: 180px;
+    }
+
+    .stamps {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .stamp {
+        max-width: calc(50% - 15px);
+    }
+
+    .stamp img {
+        width: 150px;
+    }
+
+    .cta {
+        margin-top: 10px;
+    }
+
+    .mobile-features {
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .mobile-features img {
+        width: 300px;
+    }
+}

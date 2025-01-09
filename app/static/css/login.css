@@ -1,50 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #ADA996, #CFCDC4, #E1E0DB, #EAEAEA);
     margin: 0;
+    background-image: url('../images/BG-Design.png');
     height: 100vh;
+    font-family: "Inknut Antiqua", sans-serif;
+}
+
+.header {
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.header img {
+    width: 200px;
+}
+
+.screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
 .main {
-    border: 1px solid black;
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 400px;
+    padding: 30px;
+    width: 350px;
     text-align: center;
-}
-
-.main-img {
-    width: 80px;
-    animation: flip 6s infinite ease;
-}
-
-@keyframes flip {
-    0% {
-        transform: rotateY(0deg);
-    }
-    50% {
-        transform: rotateY(180deg);
-    }
-    100% {
-        transform: rotateY(360deg);
-    }
+    background-color: rgba(255, 207, 0, 0.15);
 }
 
 h1 {
     margin: 0;
     font-size: 24px;
-    color: #333;
-}
-
-h3 {
-    font-size: 14px;
-    color: #666;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    color: black;
 }
 
 label {
@@ -53,10 +47,6 @@ label {
     text-align: left;
     display: block;
     margin-bottom: 5px;
-}
-
-.input {
-    margin-bottom: 10px;
 }
 
 input[type="text"], input[type="password"] {
@@ -70,16 +60,18 @@ input[type="text"], input[type="password"] {
 }
 
 .forgot-password {
-    color: #8e8e8e;
+    color: black;
     font-weight: 900;
     text-align: right;
     padding-right: 8px;
+    text-align: center;
 }
 
 a {
     text-decoration: none;
-    color: #8e8e8e;
-    font-size: 12px;
+    color: black;
+    font-size: 10px;
+    opacity: 60%;
 }
 
 .sign-in-button button, .sign-in-with-google button {
@@ -89,24 +81,24 @@ a {
     border: none;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 5px;
+    font-family: "Inknut Antiqua", sans-serif;
 }
 
 .sign-in-button button {
-    background-color: #ca9bed;
-    color: white;
+    background-color: rgba(226, 87, 223, 0.3);
+    color: black;
 }
 
 .sign-in-button button:hover {
-    background-color: #ca9bed;
+    background-color: rgba(184, 70, 182, 0.3);
 }
 
 .sign-in-with-google button {
     width: 100%;
     padding: 10px;
     border-radius: 20px;
-    border: 1px solid #ccc;
-    background-color: white;
+    background-color: rgba(103, 43, 160, 0.3);
     color: #000;
     display: flex;
     align-items: center;
@@ -127,28 +119,25 @@ a {
     margin-top: 20px;
 }
 
-.sign_up label {
-    font-size: 14px;
-    color: #333;
+.sign_up label{
+    font-size: 10px;
+    color: black;
+
 }
 
 .sign_up a {
-    margin-left: 5px;
-    color: #8e8e8e;
-    font-weight: 700;
+    /* margin-left: 5px; */
+    color: black;
 }
 
 @media screen and (max-width: 480px) {
     body {
         height: 90vh;
     }
+
     .main {
-        /* border: none; */
-        margin: 10px;
-    }
-    .forgot-password {
-        font-weight: 900;
-        text-align: right;
-        padding-right: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
