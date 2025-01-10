@@ -6,6 +6,7 @@ body {
     background-image: url('../images/BG-Design.png');
     height: 100vh;
     font-family: "Inknut Antiqua", sans-serif;
+    user-select: none;
 }
 
 .header {
@@ -74,38 +75,18 @@ a {
     opacity: 60%;
 }
 
-.sign-in-button button, .sign-in-with-google button {
+.sign-in-button button {
     width: 100%;
-    padding: 10px;
     border-radius: 20px;
     border: none;
-    font-size: 16px;
     cursor: pointer;
-    margin-top: 5px;
     font-family: "Inknut Antiqua", sans-serif;
-}
-
-.sign-in-button button {
     background-color: rgba(226, 87, 223, 0.3);
     color: black;
 }
 
 .sign-in-button button:hover {
-    background-color: rgba(184, 70, 182, 0.3);
-}
-
-.sign-in-with-google button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 20px;
-    background-color: rgba(103, 43, 160, 0.3);
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 16px;
-    cursor: pointer;
+    background-color: rgba(236, 23, 232, 0.3);
 }
 
 .sign-in-with-google button img{

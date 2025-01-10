@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediGuide AI | SignUp</title>
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <!-- {{ url_for('chatbot_routes.static', filename='css/login.css') }}-->
+    <link rel="shortcut icon" href="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}"
+        type="image/x-icon">
+</head>
+
+<body>
+    <div class="header">
+        <img src="../static/images/MediGuide-Logo.png" alt="">
+    </div>
+    <div class="screen">
+        <div class="main">
+            <div class="login">
+                <h1>SignUp</h1>
+                <div class="input">
+                    <div>
+                        <input type="text" placeholder="Enter your full name">
+                    </div>
+
+                    <div>
+                        <input type="text" placeholder="Enter your Email">
+                    </div>
+
+                    <div>
+                        <input type="password" placeholder="Enter your Password">
+                    </div>
+
+                    <div>
+                        <input type="password" placeholder="Enter your confirm password">
+                    </div>
+
+                </div>
+
+                <div class="sign-in-button">
+                    <button>Sign Up</button>
+                </div>
+
+                <div class="sign_up">
+                    <label>Already have a account? </label>
+                    <a href="#">&nbsp; Sign In &nbsp;</a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
