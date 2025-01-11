@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/landing_page.css">
+    <link rel="shortcut icon" href="../static/images/mediguide-ai-logo.ico" type="image/x-icon">
     <title>MediGuide AI</title>
 </head>
 
@@ -42,7 +43,7 @@
         </div>
 
         <div class="cta">
-            <button>
+            <button id="toLogin">
                 Ask a Question Now
                 <img src="../static/images/arrow.png" alt="Arrow">
             </button>
@@ -53,6 +54,12 @@
         </div>
     </div>
 
+    <script>
+        var btn = document.getElementById("toLogin");
+        btn.onclick = function () {
+            window.location.href = "/login";
+        }
+    </script>
 </body>
 
 </html>

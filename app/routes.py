@@ -5,6 +5,9 @@ from .chatbot import generate_response
 chatbot_routes = Blueprint("chatbot_routes", __name__, template_folder="./templates", static_folder='static', static_url_path='./static')
 
 @chatbot_routes.route("/")
+def landing_page():
+    return render_template("landing_page.html")
+
 @chatbot_routes.route("/login")
 def login():
     if 'user' in session:

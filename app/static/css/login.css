@@ -52,7 +52,7 @@ label {
 input[type="text"], input[type="password"] {
     width: 100%;
     padding: 15px;
-    margin: 8px 0;
+    margin: 6px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -76,7 +76,6 @@ a {
 
 .sign-in-button button, .sign-in-with-google button {
     width: 100%;
-    padding: 10px;
     border-radius: 20px;
     border: none;
     font-size: 16px;
@@ -96,7 +95,6 @@ a {
 
 .sign-in-with-google button {
     width: 100%;
-    padding: 10px;
     border-radius: 20px;
     background-color: rgba(103, 43, 160, 0.3);
     color: #000;

@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/css/chatbot.css">
-  <!--{{ url_for('chatbot_routes.static', filename='css/chatbot.css') }} -->
-  <link rel="shortcut icon" href="../static/images/mediguide-ai-logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('chatbot_routes.static', filename='css/chatbot.css') }}">
+  <!-- -->
+  <link rel="shortcut icon" href="{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}"
+    type="image/x-icon">
   <!--{{ url_for('chatbot_routes.static', filename='images/mediguide-ai-logo.png') }}-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>MediGuide AI</title>
@@ -14,12 +15,12 @@
 
 <body>
   <div class="topbar">
-    <img src="../static/images/MediGuide-Logo.png" alt="MediGuide AI">
+    <img src="{{ url_for('chatbot_routes.static', filename='images/MediGuide-Logo.png') }}" alt="MediGuide AI">
     <div class="right-topbar">
-      <button type="submit">
+      <button id="logout">
         Log Out
       </button>
-      <label>{{ user['Name'] }}</label>
+      <label>{{ user['name'] }}</label>
       <img src="{{ user['picture'] }}" alt="User Profile Photo">
     </div>
   </div>
@@ -30,39 +31,70 @@
     <div class="input-area">
       <div class="input-box">
         <input type="text" placeholder="Type here..." class="chat-input" id="chatInput">
-        <button onclick="sendMessage()"><img src="../static/images/Send-Button.png" alt="Send Button"></button>
-        <button><img src="../static/images/Mic-Option.png" alt=""></button>
+        <button onclick="sendMessage()"><img
+            src="{{ url_for('chatbot_routes.static', filename='images/Send-Button.png') }}" alt="Send Button"></button>
+        <button><img src="{{ url_for('chatbot_routes.static', filename='images/Mic-Option.png') }}" alt=""></button>
       </div>
     </div>
   </div>
 
   <script>
-    function sendMessage() {
+    async function sendMessage() {
       const input = document.getElementById('chatInput');
       const messageText = input.value.trim();
 
       if (messageText) {
         const messagesDiv = document.getElementById('messages');
+
+        // Add the user's message to the chat
         const userBubble = document.createElement('div');
         userBubble.className = 'message user-message';
         userBubble.innerText = messageText;
         messagesDiv.appendChild(userBubble);
 
-        setTimeout(() => {
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        input.value = '';
+
+        try {
+          // Make a POST request to the `/ask` route
+          const response = await fetch('/ask', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ question: messageText }),
+          });
+
+          // Check if the response is ok
+          if (!response.ok) {
+            throw new Error('Failed to fetch response from the bot.');
+          }
+
+          const data = await response.json();
+
+          // Add the bot's response to the chat
           const botBubble = document.createElement('div');
           botBubble.className = 'message bot-message';
-          botBubble.innerText = 'Thank you for your message! How can I assist you further?';
+          botBubble.innerText = data.answer || 'Sorry, I could not understand that.';
           messagesDiv.appendChild(botBubble);
-
-          messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }, 1000);
-
-        input.value = '';
+        } catch (error) {
+          // Handle errors
+          const errorBubble = document.createElement('div');
+          errorBubble.className = 'message bot-message';
+          errorBubble.innerText = 'There was an error connecting to the server. Please try again.';
+          messagesDiv.appendChild(errorBubble);
+        }
 
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
       }
     }
+
+    var btn = document.getElementById("logout");
+    btn.onclick = function () {
+      window.location.href = "/logout";
+    }
   </script>
+
 
 </body>
 

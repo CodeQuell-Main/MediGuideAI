@@ -13,7 +13,7 @@ def create_app():
     app.config['SESSION_TYPE'] = 'filesystem'
     app.config['SESSION_PERMANENT'] = False
     app.config['SESSION_COOKIE_HTTPONLY'] = True
-    app.config['SESSION_COOKIE_SECURE'] = True
+    app.config['SESSION_COOKIE_SECURE'] = False
 
     google_bp = make_google_blueprint(
         client_id=os.getenv('OAUTH_CLIENT_ID'),

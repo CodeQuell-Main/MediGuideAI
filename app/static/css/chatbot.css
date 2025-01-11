@@ -80,8 +80,8 @@ body {
 
 .user-message {
   align-self: flex-end;
-  background-color: rgba(255, 207, 0, 0.15);
-  color: white;
+  background-color: white;
+  color: black;
   word-wrap: break-word;
 }
 
